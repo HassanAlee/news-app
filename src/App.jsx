@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import reducer from "./Reducer";
 import { connect } from "react-redux";
-import "./SingleNews.scss";
+import "./dist/output.css";
 const API_KEY = "f1af2254555b4a1ab365d9d6d3f39b29";
 const url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=";
 import SingleNews from "./SingleNews";
@@ -23,15 +23,19 @@ const App = ({ load, news }) => {
     }
   };
   useEffect(() => {
-    fetchNews();
+    // fetchNews();
   }, []);
   if (news.length < 1) {
-    return <h1>Loading News</h1>;
+    return (
+      <h1 className="text-3xl font-bold underline text-center">Loading News</h1>
+    );
   }
   return (
     <>
       <section id="news">
-        <h1>Latest News</h1>
+        <h1 className="text-3xl font-bold underline text-center">
+          Latest News
+        </h1>
         <div className="news-container">
           {news.map((item, index) => {
             return (

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import reducer from "./Reducer";
 import { connect } from "react-redux";
 import "./dist/output.css";
-import { newsData } from "./newsData";
 const API_KEY = "f1af2254555b4a1ab365d9d6d3f39b29";
 const url = "https://newsapi.org/v2/everything?q=";
-// const url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=";
+const topHeadlinesUrl = "https://newsapi.org/v2/top-headlines?country=us";
 import SingleNews from "./SingleNews";
 import { createStore } from "redux";
 const initialState = {
@@ -23,7 +22,6 @@ const App = ({
   changeValue,
   searchValue,
 }) => {
-  const [term, setTerm] = useState("");
   const fetchNews = async (term) => {
     console.log(term);
     try {
@@ -35,7 +33,28 @@ const App = ({
       console.log(error.response);
     }
   };
-
+  // top headlines
+  const fetchHeadLines = async () => {
+    try {
+      const response = await axios(`${topHeadlinesUrl}&apikey=${API_KEY}`);
+      const { data } = response;
+      const { articles } = data;
+      load(articles);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  // health
+  const fetchHealth = async () => {
+    try {
+      const response = await axios(`${topHeadlinesUrl}${API_KEY}`);
+      const { data } = response;
+      const { articles } = data;
+      load(articles);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   useEffect(() => {
     fetchNews(searchValue);
   }, [searchValue]);
@@ -53,8 +72,11 @@ const App = ({
       <section id="news" className="my-4">
         <div class="flex flex-col md:flex-row justify-evenly items-center">
           <div class="flex my-5 md:my-0">
-            <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md mr-2">
-              Button 1
+            <button
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              onClick={() => fetchHeadLines()}
+            >
+              Top Headlines
             </button>
             <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2">
               Button 2

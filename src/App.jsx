@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import "./dist/output.css";
 import { newsData } from "./newsData";
 const API_KEY = "f1af2254555b4a1ab365d9d6d3f39b29";
-const url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=";
+const url = "https://newsapi.org/v2/everything?q=";
 // const url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=";
 import SingleNews from "./SingleNews";
 import { createStore } from "redux";
 const initialState = {
   news: [],
   searchTerm: "",
-  searchValue: "",
+  searchValue: "cryptocurrency",
 };
 export const store = createStore(reducer, initialState);
 const App = ({
@@ -27,7 +27,7 @@ const App = ({
   const fetchNews = async (term) => {
     console.log(term);
     try {
-      const response = await axios(`${url}${API_KEY}`);
+      const response = await axios(`${url}${searchValue}&apikey=${API_KEY}`);
       const { data } = response;
       const { articles } = data;
       load(articles);

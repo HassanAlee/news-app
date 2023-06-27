@@ -37,13 +37,12 @@ const App = ({ load, news }) => {
   }
   return (
     <>
-      <section id="news">
+      <section id="news" className="my-4">
         <h1 className="text-3xl font-bold underline text-center">
           Latest News
         </h1>
-        <div className="max-w-[1320px] mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-5">
+        <div className="max-w-[1320px] mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-x-4 gap-y-6 my-8 ">
           {news.map((item, index) => {
-            console.log(index);
             return (
               <>
                 <SingleNews key={index} {...item} />

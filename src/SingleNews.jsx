@@ -1,14 +1,29 @@
 import React from "react";
 
-const SingleNews = ({ author, title, urlToImage }) => {
+const SingleNews = ({ author, title, urlToImage, url }) => {
   return (
     <>
       <article className="single-news shadow-lg">
-        <div className="img-container">
-          <img src={urlToImage} alt={"--"} className=" object-cover" />
+        <div className="img-container h-70">
+          <img
+            src={
+              urlToImage == null
+                ? "https://images.pexels.com/photos/177557/pexels-photo-177557.jpeg?auto=compress&cs=tinysrgb&w=600"
+                : urlToImage
+            }
+            alt={"--"}
+            className=" object-cover"
+          />
         </div>
-        <h2 className="text-xl">{title}</h2>
-        <h4>{author}</h4>
+        <h2 className="text-xl font-bold">{title}</h2>
+        <h4>{author == null ? "John Doe" : author}</h4>
+        <a
+          href={url}
+          target="_blank"
+          className="px-1 py-1 bg-teal-600 font-medium text-white hover:bg-teal-900 hover:text-black"
+        >
+          Read More
+        </a>
       </article>
     </>
   );

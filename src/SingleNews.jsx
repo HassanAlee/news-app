@@ -1,15 +1,11 @@
 import React from "react";
 
-const SingleNews = ({ author, title, urlToImage, description, url }) => {
+const SingleNews = ({ author, title, img }) => {
   return (
     <>
-      <article className="single-news">
+      <article className="single-news shadow-lg">
         <div className="img-container">
-          <img src={urlToImage} alt={title} />
-        </div>
-        <div className="news-content">
-          <h2>{title}</h2>
-          <h4>{author}</h4>
+          <img src={img} alt={"--"} className=" object-cover" />
         </div>
       </article>
     </>

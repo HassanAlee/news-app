@@ -9,7 +9,7 @@ const url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=";
 import SingleNews from "./SingleNews";
 import { createStore } from "redux";
 const initialState = {
-  news: newsData,
+  news: [],
 };
 export const store = createStore(reducer, initialState);
 const App = ({ load, news }) => {
@@ -24,7 +24,7 @@ const App = ({ load, news }) => {
     }
   }, [API_KEY]);
   useEffect(() => {
-    // fetchNews();
+    fetchNews();
   }, [fetchNews]);
   if (news.length < 1) {
     return (

@@ -51,15 +51,40 @@ const App = ({
   return (
     <>
       <section id="news" className="my-4">
-        <form className="flex justify-center mb-6">
+        <div class="flex flex-col md:flex-row justify-evenly items-center">
+          <div class="flex my-5 md:my-0">
+            <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md mr-2">
+              Button 1
+            </button>
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2">
+              Button 2
+            </button>
+            <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md">
+              Button 3
+            </button>
+          </div>
           <input
             type="text"
-            className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            class="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm mb-4 md:mb-0"
+            placeholder="Enter your text"
+            onChange={(e) => onChange(e.target.value)}
+            value={searchTerm}
+          />
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mx-2 md:mx-2"
+            onClick={() => changeValue()}
+          >
+            Submit
+          </button>
+        </div>
+        {/* <div className="flex justify-between mb-6">
+          <input
+            type="text"
+            className="shadow appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="inputField"
             onChange={(e) => onChange(e.target.value)}
             value={searchTerm}
           />
-          <br />
           <button
             type="button"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -67,8 +92,8 @@ const App = ({
           >
             Search
           </button>
-        </form>
-        <h1 className="text-3xl font-bold underline text-center">
+        </div> */}
+        <h1 className="text-3xl font-bold underline text-center mt-4">
           Latest News
         </h1>
         <div className="max-w-[1320px] mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-x-4 gap-y-6 my-8 ">

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import reducer from "./Reducer";
 import { connect } from "react-redux";
@@ -6,14 +6,26 @@ import "./dist/output.css";
 import { newsData } from "./newsData";
 const API_KEY = "f1af2254555b4a1ab365d9d6d3f39b29";
 const url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=";
+// const url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=";
 import SingleNews from "./SingleNews";
 import { createStore } from "redux";
 const initialState = {
   news: [],
+  searchTerm: "",
+  searchValue: "",
 };
 export const store = createStore(reducer, initialState);
-const App = ({ load, news }) => {
-  const fetchNews = useCallback(async () => {
+const App = ({
+  load,
+  news,
+  onChange,
+  searchTerm,
+  changeValue,
+  searchValue,
+}) => {
+  const [term, setTerm] = useState("");
+  const fetchNews = async (term) => {
+    console.log(term);
     try {
       const response = await axios(`${url}${API_KEY}`);
       const { data } = response;
@@ -22,10 +34,11 @@ const App = ({ load, news }) => {
     } catch (error) {
       console.log(error.response);
     }
-  }, [API_KEY]);
+  };
+
   useEffect(() => {
-    fetchNews();
-  }, [fetchNews]);
+    fetchNews(searchValue);
+  }, [searchValue]);
   if (news.length < 1) {
     return (
       <>
@@ -43,11 +56,14 @@ const App = ({ load, news }) => {
             type="text"
             className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="inputField"
+            onChange={(e) => onChange(e.target.value)}
+            value={searchTerm}
           />
           <br />
           <button
-            type="submit"
+            type="button"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={() => changeValue()}
           >
             Search
           </button>
@@ -73,10 +89,16 @@ function mapDispatchToProp(dispatch) {
     load: (articles) => {
       dispatch({ type: "ON_LOAD", payload: { articles } });
     },
+    onChange: (term) => {
+      dispatch({ type: "ON_CHANGE", payload: { term } });
+    },
+    changeValue: () => {
+      dispatch({ type: "SUBMIT" });
+    },
   };
 }
 function mapStateToProp(state) {
-  const { news } = state;
-  return { news };
+  const { news, searchTerm, searchValue } = state;
+  return { news, searchTerm, searchValue };
 }
 export default connect(mapStateToProp, mapDispatchToProp)(App);

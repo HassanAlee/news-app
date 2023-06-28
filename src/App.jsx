@@ -44,31 +44,6 @@ const App = ({
       console.log(error.response);
     }
   };
-  // health
-  const fetchHealth = async () => {
-    try {
-      const response = await axios(
-        `${topHeadlinesUrl}&category=health&apikey=${API_KEY}`
-      );
-      const { data } = response;
-      const { articles } = data;
-      load(articles);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-  const fetchEntertainment = async () => {
-    try {
-      const response = await axios(
-        `${topHeadlinesUrl}&category=entertainment&apikey=${API_KEY}`
-      );
-      const { data } = response;
-      const { articles } = data;
-      load(articles);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
   // fetch category
   const fetchCategory = async (category) => {
     try {

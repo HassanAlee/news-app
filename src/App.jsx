@@ -114,7 +114,7 @@ const App = ({
           <input
             type="text"
             className="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm mb-4 md:mb-0"
-            placeholder="Enter your text"
+            placeholder="Search ..."
             onChange={(e) => onChange(e.target.value)}
             value={searchTerm}
           />

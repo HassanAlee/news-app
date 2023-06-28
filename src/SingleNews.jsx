@@ -15,15 +15,17 @@ const SingleNews = ({ content, title, urlToImage, url, description }) => {
             alt={"--"}
           />
         </div>
-        <h2 className="text-xl font-bold">{title}</h2>
-        <h4 className="mb-4">{content !== null ? content : description}</h4>
-        <a
-          href={url}
-          target="_blank"
-          className="px-2 py-1 bg-teal-600 font-medium text-white hover:bg-teal-900 hover:text-black"
-        >
-          Read More
-        </a>
+        <div className="px-4">
+          <h2 className="text-xl font-bold">{title}</h2>
+          <p className="mb-4 text-sm">{description}</p>
+          <a
+            href={url}
+            target="_blank"
+            className="px-2 py-1 bg-teal-600 font-medium text-white hover:bg-teal-900 hover:text-black rounded-md inline-block"
+          >
+            Read More
+          </a>
+        </div>
       </article>
     </>
   );

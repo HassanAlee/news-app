@@ -69,6 +69,19 @@ const App = ({
       console.log(error.response);
     }
   };
+  // fetch category
+  const fetchCategory = async (category) => {
+    try {
+      const response = await axios(
+        `${topHeadlinesUrl}&category=${category}&apikey=${API_KEY}`
+      );
+      const { data } = response;
+      const { articles } = data;
+      load(articles);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   useEffect(() => {
     fetchNews(searchValue);
   }, [searchValue]);
@@ -87,22 +100,40 @@ const App = ({
         <div className="flex flex-col md:flex-row justify-evenly items-center pt-6">
           <div className="flex my-5 md:my-0">
             <button
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
               onClick={() => fetchHeadLines()}
             >
               Top Headlines
             </button>
             <button
               className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
-              onClick={() => fetchHealth()}
+              onClick={() => fetchCategory("health")}
             >
               Health
             </button>
             <button
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md"
-              onClick={() => fetchEntertainment()}
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              onClick={() => fetchCategory("entertainment")}
             >
               Entertainment
+            </button>
+            <button
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              onClick={() => fetchCategory("science")}
+            >
+              Science
+            </button>
+            <button
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              onClick={() => fetchCategory("sports")}
+            >
+              Sports
+            </button>
+            <button
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md"
+              onClick={() => fetchCategory("business")}
+            >
+              Business
             </button>
           </div>
           <input
@@ -119,25 +150,6 @@ const App = ({
             Submit
           </button>
         </div>
-        {/* <div className="flex justify-between mb-6">
-          <input
-            type="text"
-            className="shadow appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="inputField"
-            onChange={(e) => onChange(e.target.value)}
-            value={searchTerm}
-          />
-          <button
-            type="button"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={() => changeValue()}
-          >
-            Search
-          </button>
-        </div> */}
-        <h1 className="text-3xl font-bold underline text-center mt-4">
-          Latest News
-        </h1>
         <div className="max-w-[1320px] mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-x-4 gap-y-6 my-8 ">
           {news.map((item, index) => {
             return (

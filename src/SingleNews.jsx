@@ -1,6 +1,6 @@
 import React from "react";
 
-const SingleNews = ({ author, title, urlToImage, url }) => {
+const SingleNews = ({ content, title, urlToImage, url, description }) => {
   return (
     <>
       <article className="single-news shadow-lg pb-4">
@@ -16,7 +16,7 @@ const SingleNews = ({ author, title, urlToImage, url }) => {
           />
         </div>
         <h2 className="text-xl font-bold">{title}</h2>
-        <h4 className="mb-4">{author == null ? "John Doe" : author}</h4>
+        <h4 className="mb-4">{content !== null ? content : description}</h4>
         <a
           href={url}
           target="_blank"

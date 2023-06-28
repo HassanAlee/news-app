@@ -73,33 +73,33 @@ const App = ({
     <>
       <section id="news" className="my-4">
         <div className="flex flex-col md:flex-row justify-evenly items-center pt-6">
-          <div className="flex my-5 md:my-0">
+          <div className="flex flex-col md:flex-row my-5 md:my-0">
             <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md md:mr-2 mb-2 md:mb-0"
               onClick={() => fetchHeadLines()}
             >
               Top Headlines
             </button>
             <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md md:mr-2 mb-2 md:mb-0"
               onClick={() => fetchCategory("health")}
             >
               Health
             </button>
             <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md md:mr-2 mb-2 md:mb-0"
               onClick={() => fetchCategory("entertainment")}
             >
               Entertainment
             </button>
             <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md md:mr-2 mb-2 md:mb-0"
               onClick={() => fetchCategory("science")}
             >
               Science
             </button>
             <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md md:mr-2 mb-2 md:mb-0"
               onClick={() => fetchCategory("sports")}
             >
               Sports

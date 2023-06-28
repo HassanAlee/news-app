@@ -47,7 +47,21 @@ const App = ({
   // health
   const fetchHealth = async () => {
     try {
-      const response = await axios(`${topHeadlinesUrl}${API_KEY}`);
+      const response = await axios(
+        `${topHeadlinesUrl}&category=health&apikey=${API_KEY}`
+      );
+      const { data } = response;
+      const { articles } = data;
+      load(articles);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  const fetchEntertainment = async () => {
+    try {
+      const response = await axios(
+        `${topHeadlinesUrl}&category=entertainment&apikey=${API_KEY}`
+      );
       const { data } = response;
       const { articles } = data;
       load(articles);
@@ -70,30 +84,36 @@ const App = ({
   return (
     <>
       <section id="news" className="my-4">
-        <div class="flex flex-col md:flex-row justify-evenly items-center">
-          <div class="flex my-5 md:my-0">
+        <div className="flex flex-col md:flex-row justify-evenly items-center pt-6">
+          <div className="flex my-5 md:my-0">
             <button
-              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md mr-2"
               onClick={() => fetchHeadLines()}
             >
               Top Headlines
             </button>
-            <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2">
-              Button 2
+            <button
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md mr-2"
+              onClick={() => fetchHealth()}
+            >
+              Health
             </button>
-            <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md">
-              Button 3
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md"
+              onClick={() => fetchEntertainment()}
+            >
+              Entertainment
             </button>
           </div>
           <input
             type="text"
-            class="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm mb-4 md:mb-0"
+            className="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm mb-4 md:mb-0"
             placeholder="Enter your text"
             onChange={(e) => onChange(e.target.value)}
             value={searchTerm}
           />
           <button
-            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mx-2 md:mx-2"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mx-2 md:mx-2"
             onClick={() => changeValue()}
           >
             Submit

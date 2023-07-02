@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import reducer from "./Reducer";
 import { connect } from "react-redux";
 import "./dist/output.css";
+import Pagination from "./Pagination";
 const API_KEY = "f1af2254555b4a1ab365d9d6d3f39b29";
 const url = "https://newsapi.org/v2/everything?q=";
 const topHeadlinesUrl = "https://newsapi.org/v2/top-headlines?country=us";
@@ -22,6 +23,10 @@ const App = ({
   changeValue,
   searchValue,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 25;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
   const fetchNews = async (term) => {
     console.log(term);
     try {
@@ -69,6 +74,8 @@ const App = ({
       </>
     );
   }
+  console.log(firstIndex);
+  console.log(lastIndex);
   return (
     <>
       <section id="news" className="my-4">
@@ -126,7 +133,7 @@ const App = ({
           </button>
         </div>
         <div className="max-w-[1320px] mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-x-4 gap-y-6 my-8 ">
-          {news.map((item, index) => {
+          {news.slice(firstIndex, lastIndex).map((item, index) => {
             return (
               <>
                 <SingleNews key={index} {...item} />
@@ -135,6 +142,11 @@ const App = ({
           })}
         </div>
       </section>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        length={news.length}
+      />
     </>
   );
 };

@@ -7,6 +7,7 @@ import Pagination from "./Pagination";
 const API_KEY = "f1af2254555b4a1ab365d9d6d3f39b29";
 const url = "https://newsapi.org/v2/everything?q=";
 const topHeadlinesUrl = "https://newsapi.org/v2/top-headlines?country=us";
+import { FaBars, FaTimes } from "react-icons/fa";
 import SingleNews from "./SingleNews";
 import { createStore } from "redux";
 const initialState = {
@@ -24,6 +25,7 @@ const App = ({
   searchValue,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [clicked, setClicked] = useState(false);
   const recordsPerPage = 25;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
@@ -65,6 +67,9 @@ const App = ({
   useEffect(() => {
     fetchNews(searchValue);
   }, [searchValue]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
   if (news.length < 1) {
     return (
       <>
@@ -80,7 +85,17 @@ const App = ({
     <>
       <section id="news" className="my-4">
         <div className="flex flex-col md:flex-row justify-evenly items-center pt-6">
-          <div className="flex flex-col md:flex-row my-5 md:my-0">
+          <button
+            className="md:hidden ml-auto mr-8 mb-6 font-bold"
+            onClick={() => setClicked(!clicked)}
+          >
+            {clicked ? <FaTimes /> : <FaBars />}
+          </button>
+          <div
+            className={`flex flex-col  md:block md:flex-row my-5 md:my-0 ${
+              clicked ? "" : "hidden"
+            }`}
+          >
             <button
               className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md md:mr-2 mb-2 md:mb-0"
               onClick={() => fetchHeadLines()}
